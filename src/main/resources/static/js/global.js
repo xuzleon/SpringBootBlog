@@ -1,3 +1,7 @@
+
+var CONTEXT_PATH="/blog";
+
+
 window.alert = function(message) {
 	if(!$(".alert-box").length) {
 		$("body").append(

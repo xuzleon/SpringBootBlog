@@ -1,8 +1,10 @@
 package com.chovy.blog;
 
 import com.chovy.blog.dao.DiscussPostMapper;
+import com.chovy.blog.dao.LoginTicketMapper;
 import com.chovy.blog.dao.UserMapper;
 import com.chovy.blog.entity.DiscussPost;
+import com.chovy.blog.entity.LoginTicket;
 import com.chovy.blog.entity.Page;
 import com.chovy.blog.entity.User;
 import org.junit.Test;
@@ -26,6 +28,9 @@ public class MapperTest {
 
     @Autowired
     private DiscussPostMapper discussPostMapper;
+
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
     @Test
     public void testSelectById(){
         User user=userMapper.selectById(1);
@@ -74,4 +79,24 @@ public class MapperTest {
         System.out.println(rows);
     }
 
+    @Test
+    public void testInsertLoginTicket(){
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(101);
+        loginTicket.setTicket("abvd");
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis()+1000*60*10));
+
+        loginTicketMapper.insertLoginTicket(loginTicket);
+    }
+
+    @Test
+    public void testSelectLoginTicket(){
+        LoginTicket loginTicket = loginTicketMapper.selectByTicket("abvd");
+        System.out.println(loginTicket);
+
+        loginTicketMapper.updateStatus("abvd",1);
+        loginTicket=loginTicketMapper.selectByTicket("abvd");
+        System.out.println(loginTicket);
+    }
 }
