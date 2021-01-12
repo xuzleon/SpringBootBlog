@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+</head>
+<body>
+    <p>
+        <input type="button" value="发送" onclick="send()">
+    </p>
+
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script>
+        function send() {
+            $.post(
+                "/blog/alpha/ajax",
+                {"name":"张三","age":24},
+                // data为字符串格式
+                function (data) {
+                    console.log(typeof(data));
+                    console.log(data);
+                    //字符串转JSON格式
+                    data=$.parseJSON(data);
+                    console.log(typeof(data));
+                    console.log(data.code);
+                    console.log(data.msg);
+
+
+                }
+            )
+        }
+
+    </script>
+</body>
+</html>

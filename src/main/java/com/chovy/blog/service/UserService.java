@@ -108,7 +108,7 @@ public class UserService implements BlogConstant {
     }
 
     public Map<String, Object> login(String username, String password, int expiredSeconds) {
-        HashMap<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
         //空值处理
         if (StringUtils.isBlank(username)) {
@@ -144,9 +144,26 @@ public class UserService implements BlogConstant {
         loginTicket.setTicket(BlogUtil.generateUUID());
         loginTicket.setStatus(0);
         loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
+        loginTicketMapper.insertLoginTicket(loginTicket);
 
         map.put("ticket",loginTicket.getTicket());
         return map;
     }
+    public void logout(String ticket){
+        loginTicketMapper.updateStatus(ticket, 1);
 
+    }
+
+    public LoginTicket findLoginTicket(String ticket){
+        return loginTicketMapper.selectByTicket(ticket);
+    }
+
+    public int updateHeader(int userId,String headerUrl){
+        return userMapper.updateHeader(userId, headerUrl);
+
+    }
+
+    public int updatePassword(int userId,String password){
+        return userMapper.updatePassword(userId,password);
+    }
 }

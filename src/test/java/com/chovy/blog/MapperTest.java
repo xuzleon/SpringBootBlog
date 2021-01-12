@@ -99,4 +99,5 @@ public class MapperTest {
         loginTicket=loginTicketMapper.selectByTicket("abvd");
         System.out.println(loginTicket);
     }
+
 }
