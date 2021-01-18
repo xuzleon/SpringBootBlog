@@ -55,6 +55,7 @@ public class DiscussPostController implements BlogConstant {
     @RequestMapping(path = "/detail/{discussPostId}",method = RequestMethod.GET)
     public String getDiscussPost(@PathVariable("discussPostId") int discussPostId, Model model, Page page){
         //帖子
+        System.out.println(discussPostId);
         DiscussPost post = discussPostService.findDiscussPostById(discussPostId);
         model.addAttribute("post",post);
         //作者
@@ -64,7 +65,6 @@ public class DiscussPostController implements BlogConstant {
         page.setLimit(5);
         page.setPath("/discuss/detail/"+discussPostId);
         page.setRows(post.getCommentCount());
-
         // 评论:给帖子的评论
         // 回复:给评论的评论
         // 评论列表
@@ -92,10 +92,8 @@ public class DiscussPostController implements BlogConstant {
                             replyVo.put("user",userService.findUserById(reply.getUserId()));
                             //回复的目标
                             User target = reply.getTargetId() == 0 ? null : userService.findUserById(reply.getTargetId());
-
                             replyVo.put("target",target);
                             replyOvList.add(replyVo);
-
                         }
                     }
                     commentVo.put("replys",replyOvList);
@@ -106,7 +104,6 @@ public class DiscussPostController implements BlogConstant {
             }
         }
         model.addAttribute("comments",commentVoList);
-
         return "/site/discuss-detail";
     }
 }

@@ -10,7 +10,7 @@ public class Comment {
     private int targetId;
     private String content;
     private int status;
-    private Date creatTime;
+    private Date createTime;
 
     public int getId() {
         return id;
@@ -60,13 +60,12 @@ public class Comment {
         this.status = status;
     }
 
-
-    public Date getCreatTime() {
-        return creatTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(Date creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public int getTargetId() {
@@ -87,7 +86,7 @@ public class Comment {
                 ", targetId=" + targetId +
                 ", content='" + content + '\'' +
                 ", status=" + status +
-                ", creatTime=" + creatTime +
+                ", createTime=" + createTime +
                 '}';
     }
 
